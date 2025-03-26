@@ -1,9 +1,8 @@
-HELP.md
+# 忽略 Maven 构建目录
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/src/main/resources/application.properties
 
 ### STS ###
 .apt_generated
@@ -32,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# 忽略 application.properties 文件
+/application.properties
