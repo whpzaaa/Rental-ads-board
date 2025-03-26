@@ -32,5 +32,3 @@ build/
 ### VS Code ###
 .vscode/
 
-# 忽略 application.properties 文件
-/application.properties
