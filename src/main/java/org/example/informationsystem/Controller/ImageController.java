@@ -2,13 +2,18 @@ package org.example.informationsystem.Controller;
 
 
 import org.example.informationsystem.Service.ImageService;
-import org.example.informationsystem.Entity.DTO.Image;
+import org.example.informationsystem.pojo.DTO.ImageDTO;
+import org.example.informationsystem.pojo.entity.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+
+import static org.jacoco.agent.rt.internal_43f5073.core.runtime.AgentOptions.OutputMode.file;
 
 @RestController
 @RequestMapping("/api/images")
@@ -38,12 +43,21 @@ public class ImageController {
         return image != null ? ResponseEntity.ok(image) : ResponseEntity.notFound().build();
     }
 
-    // 上传图片
-    @PostMapping
-    public ResponseEntity<Image> uploadImage(@RequestBody Image image) {
-        boolean success = imageService.uploadImage(image);
-        return success ? ResponseEntity.status(HttpStatus.CREATED).body(image)
-                : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    /**
+     * 上传图片接口，同时保存图片文件和图片信息
+     *
+     * @param imageDTO 封装了上传文件及其他参数的 DTO
+     * @return 上传成功返回图片信息，否则返回500错误
+     */
+    @PostMapping("/upload")
+    public ResponseEntity<Image> uploadImage(@ModelAttribute ImageDTO imageDTO) throws IOException  {
+
+        Image savedImage = imageService.uploadImage(imageDTO);
+        if (savedImage != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedImage);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     // 删除图片

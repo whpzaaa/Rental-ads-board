@@ -1,9 +1,9 @@
 package org.example.informationsystem.Controller;
 
 
-import org.example.informationsystem.Entity.VO.UserVO;
+import org.example.informationsystem.pojo.VO.UserVO;
 import org.example.informationsystem.Service.UserService;
-import org.example.informationsystem.Entity.DTO.User;
+import org.example.informationsystem.pojo.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

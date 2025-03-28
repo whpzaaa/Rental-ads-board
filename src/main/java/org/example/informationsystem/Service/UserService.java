@@ -1,6 +1,6 @@
 package org.example.informationsystem.Service;
 
-import org.example.informationsystem.Entity.DTO.User;
+import org.example.informationsystem.pojo.entity.User;
 
 import java.util.List;
 

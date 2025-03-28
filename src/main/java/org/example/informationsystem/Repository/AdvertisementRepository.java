@@ -1,7 +1,7 @@
 package org.example.informationsystem.Repository;
 
 import jakarta.transaction.Transactional;
-import org.example.informationsystem.Entity.DTO.Advertisement;
+import org.example.informationsystem.pojo.entity.Advertisement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +23,5 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
             "a.updatedAt = CURRENT_TIMESTAMP " +
             "WHERE a.adId = :#{#advertisement.adId}")
     void updateById(@Param("advertisement") Advertisement advertisement);
+
 }

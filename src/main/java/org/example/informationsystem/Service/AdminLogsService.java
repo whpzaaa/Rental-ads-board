@@ -1,7 +1,7 @@
 package org.example.informationsystem.Service;
 
 
-import org.example.informationsystem.Entity.DTO.AdminLogs;
+import org.example.informationsystem.pojo.entity.AdminLogs;
 
 import java.util.List;
 

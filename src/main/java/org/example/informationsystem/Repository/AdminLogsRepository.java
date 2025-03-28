@@ -1,7 +1,7 @@
 package org.example.informationsystem.Repository;
 
 import jakarta.transaction.Transactional;
-import org.example.informationsystem.Entity.DTO.AdminLogs;
+import org.example.informationsystem.pojo.entity.AdminLogs;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

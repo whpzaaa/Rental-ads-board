@@ -1,7 +1,6 @@
-package org.example.informationsystem.Entity.VO;
+package org.example.informationsystem.pojo.VO;
 
 
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;

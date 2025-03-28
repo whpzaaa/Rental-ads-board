@@ -2,7 +2,7 @@ package org.example.informationsystem.Controller;
 
 
 import org.example.informationsystem.Service.AdminLogsService;
-import org.example.informationsystem.Entity.DTO.AdminLogs;
+import org.example.informationsystem.pojo.entity.AdminLogs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

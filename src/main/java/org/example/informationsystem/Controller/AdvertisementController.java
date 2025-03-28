@@ -2,14 +2,15 @@ package org.example.informationsystem.Controller;
 
 
 import jakarta.validation.Valid;
+import org.example.informationsystem.Result.PageResult;
 import org.example.informationsystem.Service.AdvertisementService;
-import org.example.informationsystem.Entity.DTO.Advertisement;
+import org.example.informationsystem.pojo.entity.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/ads")
@@ -20,9 +21,13 @@ public class AdvertisementController {
 
     // 获取所有房源
     @GetMapping
-    public ResponseEntity<List<Advertisement>> getAllAdvertisements() {
-        List<Advertisement> advertisements = advertisementService.getAllAdvertisements();
-        return ResponseEntity.ok(advertisements);
+    public ResponseEntity<org.example.informationsystem.Result.PageResult> getAllAdvertisements(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        PageResult pageResult = advertisementService.getAllAdvertisements(pageable);
+
+        return ResponseEntity.ok(pageResult);
     }
 
     // 根据ID获取房源
@@ -35,6 +40,9 @@ public class AdvertisementController {
     // 创建房源
     @PostMapping
     public ResponseEntity<Advertisement> createAdvertisement(@Valid @RequestBody Advertisement advertisement) {
+        if (advertisement.getAdId() != null) {
+            return ResponseEntity.badRequest().build();
+        }
         boolean success = advertisementService.createAdvertisement(advertisement);
         return success ? ResponseEntity.status(HttpStatus.CREATED).body(advertisement)
                 : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

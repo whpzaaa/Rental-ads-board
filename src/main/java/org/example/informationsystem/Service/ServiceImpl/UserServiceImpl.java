@@ -4,7 +4,7 @@ package org.example.informationsystem.Service.ServiceImpl;
 
 import org.example.informationsystem.Repository.UserRepository;
 import org.example.informationsystem.Service.UserService;
-import org.example.informationsystem.Entity.DTO.User;
+import org.example.informationsystem.pojo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
