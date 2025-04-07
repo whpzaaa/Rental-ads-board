@@ -21,4 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "u.updatedAt = CURRENT_TIMESTAMP " +
             "WHERE u.userId = :#{#user.userId}")
     void updateById(@Param("user") User user);
+
+    User getByUsername(String username);
+
+    User getByEmail(String email);
 }

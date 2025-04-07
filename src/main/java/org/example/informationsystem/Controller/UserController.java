@@ -1,9 +1,15 @@
 package org.example.informationsystem.Controller;
 
 
+import org.example.informationsystem.Properties.JwtProperties;
+import org.example.informationsystem.pojo.DTO.ChangePasswordDTO;
+import org.example.informationsystem.pojo.DTO.LoginDTO;
+import org.example.informationsystem.pojo.DTO.RegisterDTO;
+import org.example.informationsystem.pojo.VO.LoginVO;
 import org.example.informationsystem.pojo.VO.UserVO;
 import org.example.informationsystem.Service.UserService;
 import org.example.informationsystem.pojo.entity.User;
+import org.example.informationsystem.utills.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,6 +27,25 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    //登录
+    @PostMapping("/login")
+    public ResponseEntity<LoginVO> login(@RequestBody LoginDTO loginDTO) {
+        // 调用业务层认证方法
+        return userService.login(loginDTO);
+    }
+
+    //注册
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+        return userService.register(registerDTO);
+    }
+
+    //修改密码
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
+        return userService.changePassword(changePasswordDTO);
+    }
 
     // 获取所有用户
     @GetMapping

@@ -1,6 +1,7 @@
 package org.example.informationsystem.Service.ServiceImpl;
 
 
+import org.example.informationsystem.context.BaseContext;
 import org.example.informationsystem.pojo.entity.Image;
 import org.example.informationsystem.pojo.VO.AdVO;
 import org.example.informationsystem.Repository.AdvertisementRepository;
@@ -53,6 +54,8 @@ public class AdvertisementServiceImpl  implements AdvertisementService {
 
     @Override
     public boolean createAdvertisement(Advertisement advertisement) {
+        Long userId = BaseContext.getCurrentId();
+        advertisement.setUserId(userId);
         advertisement.setCreatedAt(java.time.LocalDateTime.now());
         advertisement.setUpdatedAt(java.time.LocalDateTime.now());
         Advertisement savedAdvertisement = advertisementRepository.save(advertisement);
