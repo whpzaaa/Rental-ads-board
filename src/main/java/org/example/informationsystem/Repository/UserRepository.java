@@ -13,11 +13,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE User u SET " +
-            "u.username = :#{#user.username}, " +
-            "u.passwordHash = :#{#user.passwordHash}, " +
-            "u.email = :#{#user.email}, " +
-            "u.role = :#{#user.role}, " +
-            "u.isActive = :#{#user.isActive}, " +
+            "u.username = CASE WHEN :#{#user.username} IS NOT NULL THEN :#{#user.username} ELSE u.username END, " +
+            "u.passwordHash = CASE WHEN :#{#user.passwordHash} IS NOT NULL THEN :#{#user.passwordHash} ELSE u.passwordHash END, " +
+            "u.email = CASE WHEN :#{#user.email} IS NOT NULL THEN :#{#user.email} ELSE u.email END, " +
+            "u.role = CASE WHEN :#{#user.role} IS NOT NULL THEN :#{#user.role} ELSE u.role END, " +
+            "u.isActive = CASE WHEN :#{#user.isActive} IS NOT NULL THEN :#{#user.isActive} ELSE u.isActive END, " +
             "u.updatedAt = CURRENT_TIMESTAMP " +
             "WHERE u.userId = :#{#user.userId}")
     void updateById(@Param("user") User user);

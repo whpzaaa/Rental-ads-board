@@ -36,6 +36,10 @@ public class UserServiceImpl  implements UserService {
     @Override
     public boolean updateUser(User user) {
         if (!userRepository.existsById(user.getUserId())) return false;
+        if(user.getPasswordHash() != null){
+            String encodePwd = DigestUtils.md5DigestAsHex(user.getPasswordHash().getBytes(StandardCharsets.UTF_8));
+            user.setPasswordHash(encodePwd);
+        }
         userRepository.updateById(user);
         return true;
     }
@@ -95,6 +99,7 @@ public class UserServiceImpl  implements UserService {
         // 登录成功后生成 jwt 令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
+        claims.put("userRole",user.getRole());
         String token = JwtUtil.createJWT(
                 jwtProperties.getAdminSecretKey(),
                 jwtProperties.getAdminTtl(),
